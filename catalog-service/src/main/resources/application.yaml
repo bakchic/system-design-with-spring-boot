@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: catalog-service
+    name: catalog
 
   datasource:
     url: jdbc:mysql://mysql:3306/catalogdb

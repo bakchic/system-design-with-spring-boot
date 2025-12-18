@@ -1,4 +1,4 @@
-package com.systemdesign.config;
+package com.systemdesign;
 
 import com.systemdesign.model.Product;
 import org.springframework.context.annotation.Bean;

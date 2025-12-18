@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=X-Gateway, System-Design-Lab
+
+      routes:
+
+        - id: catalog
+          uri: http://catalog:8081
+          predicates:
+            - Path=/catalog/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+                key-resolver: "#{@ipKeyResolver}"
+
+        - id: order
+          uri: http://order:8082
+          predicates:
+            - Path=/orders/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 5
+                key-resolver: "#{@ipKeyResolver}"
+  data:
+    redis:
+      host: redis
+      port: 6379
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
