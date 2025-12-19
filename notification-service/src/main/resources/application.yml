@@ -1,0 +1,27 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: notification
+
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: notification-group
+      auto-offset-reset: earliest  # ← important to consume old messages
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    admin:
+      client-id: notification-admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+logging:
+  level:
+    org.springframework.kafka: INFO
+    org.apache.kafka.clients.consumer: INFO
