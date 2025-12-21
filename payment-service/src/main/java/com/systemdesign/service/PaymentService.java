@@ -22,14 +22,19 @@ public class PaymentService {
         Payment payment = new Payment();
         payment.setOrderId(orderId);
         payment.setAmount(amount);
-        payment.setStatus("SUCCESS"); // simple simulation
         payment.setCreatedAt(LocalDateTime.now());
+
+        // Simulate failure
+        if(Double.compare(amount, 1000.0) > 0) {
+            payment.setStatus("FAILED");
+        } else {
+            payment.setStatus("SUCCESS");
+        }
 
         Payment saved = paymentRepository.save(payment);
 
-        // Send Kafka event
-        paymentProducer.sendPaymentEvent("Payment completed for order: " + orderId);
-        System.out.println("Data published into payment-events topic");
+        // Publish Kafka event
+        paymentProducer.sendPaymentEvent(orderId + ":" + payment.getStatus());
 
         return saved;
     }

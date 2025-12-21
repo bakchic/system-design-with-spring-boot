@@ -38,10 +38,12 @@ public class OrderService {
 
 
                     System.out.println("Creating order event into Kafka");
+                    String orderMessage = order.getId()+":"+order.getAmount();
+                    System.out.println("orderMessage value:"+orderMessage);
                     kafkaTemplate.send(
                             "order-events",
                             saved.getId().toString(),
-                            "ORDER_CREATED"
+                            orderMessage
                     );
 
                     System.out.println("Order event created into Kafka");
