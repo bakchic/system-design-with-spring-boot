@@ -1,10 +1,12 @@
 server:
   port: 8080
 
+jwt:
+  secret: my-super-secret-key-my-super-secret-key
+
 spring:
   application:
     name: api-gateway
-
   cloud:
     gateway:
       default-filters:
@@ -12,23 +14,39 @@ spring:
 
       routes:
 
+        # ========================
+        # AUTH SERVICE (NO JWT)
+        # ========================
+        - id: auth
+          uri: http://auth:8086
+          predicates:
+            - Path=/auth/**
+
+        # ========================
+        # CATALOG SERVICE
+        # ========================
         - id: catalog
           uri: http://catalog:8081
           predicates:
             - Path=/catalog/**
           filters:
-            - StripPrefix=1
+            - name: JwtAuthFilter                 # JWT validation first
+            - StripPrefix=1                       # removes 'catalog' + 'api'
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter.replenishRate: 5
                 redis-rate-limiter.burstCapacity: 10
                 key-resolver: "#{@ipKeyResolver}"
 
+        # ========================
+        # ORDER SERVICE
+        # ========================
         - id: order
           uri: http://order:8082
           predicates:
             - Path=/orders/**
           filters:
+            - name: JwtAuthFilter
             - StripPrefix=1
             - name: RequestRateLimiter
               args:
@@ -36,11 +54,15 @@ spring:
                 redis-rate-limiter.burstCapacity: 5
                 key-resolver: "#{@ipKeyResolver}"
 
+        # ========================
+        # PAYMENT SERVICE
+        # ========================
         - id: payment
           uri: http://payment:8084
           predicates:
-            - Path=/payment/**
+            - Path=/payments/**
           filters:
+            - name: JwtAuthFilter
             - StripPrefix=1
             - name: RequestRateLimiter
               args:
@@ -48,10 +70,52 @@ spring:
                 redis-rate-limiter.burstCapacity: 5
                 key-resolver: "#{@ipKeyResolver}"
 
-#        - id: analytic
-#          uri: http://analytic:8085
+        # ========================
+        # ANALYTICS SERVICE
+        # ========================
+        - id: analytics
+          uri: http://analytics:8085
+          predicates:
+            - Path=/analytics/**
+          filters:
+            - name: JwtAuthFilter
+            - StripPrefix=1
+
+#  cloud:
+#    gateway:
+#      default-filters:
+#        - AddResponseHeader=X-Gateway, System-Design-Lab
+#
+#      routes:
+#
+#        - id: catalog
+#          uri: http://catalog:8081
 #          predicates:
-#            - Path=/analytic/**
+#            - Path=/catalog/**
+#          filters:
+#            - StripPrefix=1
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 5
+#                redis-rate-limiter.burstCapacity: 10
+#                key-resolver: "#{@ipKeyResolver}"
+#
+#        - id: order
+#          uri: http://order:8082
+#          predicates:
+#            - Path=/orders/**
+#          filters:
+#            - StripPrefix=1
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 2
+#                redis-rate-limiter.burstCapacity: 5
+#                key-resolver: "#{@ipKeyResolver}"
+#
+#        - id: payment
+#          uri: http://payment:8084
+#          predicates:
+#            - Path=/payment/**
 #          filters:
 #            - StripPrefix=1
 #            - name: RequestRateLimiter

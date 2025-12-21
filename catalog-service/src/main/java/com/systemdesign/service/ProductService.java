@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    private final ProductRepository repository;
+    /*private final ProductRepository repository;
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
@@ -44,13 +44,16 @@ public class ProductService {
     public Product getProductById(Long id) {
         System.out.println("Fetching product " + id + " from DB...");
         return repository.findById(id).orElse(null);
+    }*/
+
+    private final RedisTemplate<String, Product> redisTemplate;
+    private final ProductRepository repo;
+
+    public ProductService(RedisTemplate<String, Product> redisTemplate,
+                          ProductRepository repo) {
+        this.redisTemplate = redisTemplate;
+        this.repo = repo;
     }
-
-    /*@Autowired
-    private  ProductRepository repo;
-
-    @Autowired
-    private  RedisTemplate<String, Product> redisTemplate;
 
     public Product getProduct(Long id) {
         String key = "product:" + id;
@@ -80,5 +83,5 @@ public class ProductService {
                 .set("product:" + saved.getId(), saved, Duration.ofMinutes(10));
 
         return saved;
-    }*/
+    }
 }

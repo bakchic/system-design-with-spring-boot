@@ -1,0 +1,10 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: auth-service
+
+jwt:
+  secret: my-super-secret-key-my-super-secret-key
+  expiration: 3600000 # 1 hour
