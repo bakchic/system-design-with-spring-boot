@@ -40,6 +40,17 @@ services:
       - mysql
       - redis
 
+  analytics:
+    build:
+      context: ./analytics-service
+      dockerfile: Dockerfile
+    container_name: analytics
+    ports:
+      - "8085:8085"
+    depends_on:
+      - kafka
+      - postgres
+
   order:
     build:
       context: ./order-service

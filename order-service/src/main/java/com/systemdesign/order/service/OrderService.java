@@ -38,7 +38,7 @@ public class OrderService {
 
 
                     System.out.println("Creating order event into Kafka");
-                    String orderMessage = order.getId()+":"+order.getAmount();
+                    String orderMessage = order.getId()+":"+order.getAmount()+":"+order.getStatus();
                     System.out.println("orderMessage value:"+orderMessage);
                     kafkaTemplate.send(
                             "order-events",
