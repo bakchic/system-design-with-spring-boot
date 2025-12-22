@@ -12,10 +12,10 @@
         <module>api-gateway</module>
         <module>auth-service</module>
         <module>catalog-service</module>
-        <module>order-service</module>
         <module>notification-service</module>
         <module>payment-service</module>
         <module>analytics-service</module>
+        <module>order-service</module>
     </modules>
 
     <parent>

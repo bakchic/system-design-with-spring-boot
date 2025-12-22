@@ -13,39 +13,6 @@ import java.util.List;
 
 @Service
 public class ProductService {
-
-    /*private final ProductRepository repository;
-
-    public ProductService(ProductRepository repository) {
-        this.repository = repository;
-    }
-
-    // Cache all products for 5 minutes
-    @Cacheable(value = "productsCache")
-    public List<Product> getAllProducts() {
-        System.out.println("Fetching products from DB...");
-        return repository.findAll();
-    }
-
-    // When adding a new product, evict cache
-    @CacheEvict(value = "productsCache", allEntries = true)
-    public Product addProduct(Product product) {
-        return repository.save(product);
-    }
-
-    // When updating product, evict cache
-    @CacheEvict(value = "productsCache", allEntries = true)
-    public Product updateProduct(Product product) {
-        return repository.save(product);
-    }
-
-    // Optional: cache single product by id
-    @Cacheable(value = "productCache", key = "#id")
-    public Product getProductById(Long id) {
-        System.out.println("Fetching product " + id + " from DB...");
-        return repository.findById(id).orElse(null);
-    }*/
-
     private final RedisTemplate<String, Product> redisTemplate;
     private final ProductRepository repo;
 

@@ -81,48 +81,6 @@ spring:
             - name: JwtAuthFilter
             - StripPrefix=1
 
-#  cloud:
-#    gateway:
-#      default-filters:
-#        - AddResponseHeader=X-Gateway, System-Design-Lab
-#
-#      routes:
-#
-#        - id: catalog
-#          uri: http://catalog:8081
-#          predicates:
-#            - Path=/catalog/**
-#          filters:
-#            - StripPrefix=1
-#            - name: RequestRateLimiter
-#              args:
-#                redis-rate-limiter.replenishRate: 5
-#                redis-rate-limiter.burstCapacity: 10
-#                key-resolver: "#{@ipKeyResolver}"
-#
-#        - id: order
-#          uri: http://order:8082
-#          predicates:
-#            - Path=/orders/**
-#          filters:
-#            - StripPrefix=1
-#            - name: RequestRateLimiter
-#              args:
-#                redis-rate-limiter.replenishRate: 2
-#                redis-rate-limiter.burstCapacity: 5
-#                key-resolver: "#{@ipKeyResolver}"
-#
-#        - id: payment
-#          uri: http://payment:8084
-#          predicates:
-#            - Path=/payment/**
-#          filters:
-#            - StripPrefix=1
-#            - name: RequestRateLimiter
-#              args:
-#                redis-rate-limiter.replenishRate: 2
-#                redis-rate-limiter.burstCapacity: 5
-#                key-resolver: "#{@ipKeyResolver}"
 
   data:
     redis:

@@ -19,4 +19,19 @@ public class PaymentController {
                                @RequestParam Double amount) {
         return paymentService.processPayment(orderId, amount);
     }
+
+    @PostMapping("/process/{orderId}")
+    public String process(@PathVariable Long orderId) throws InterruptedException {
+
+        // simulate slowness or failure
+        if (orderId % 2 == 0) {
+            Thread.sleep(3000); // timeout
+        }
+
+        if (orderId % 3 == 0) {
+            throw new RuntimeException("Payment failed");
+        }
+
+        return "PAYMENT SUCCESS FOR ORDER " + orderId;
+    }
 }

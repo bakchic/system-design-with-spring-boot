@@ -22,4 +22,9 @@ public class OrderController {
 
         return service.createOrder(userId, amount, key);
     }
+
+    @PostMapping("/{orderId}")
+    public String placeOrder(@PathVariable Long orderId) {
+        return service.placeOrder(orderId).join();
+    }
 }
