@@ -2,5 +2,18 @@ image:
   repository: chiruapala/catalog-service
   tag: 1.0.0
 
-service:
-  port: 8081
+mysql:
+  auth:
+    rootPassword: rootpassword
+    database: catalogdb
+    username: cataloguser
+    password: catalogpassword
+  primary:
+    persistence:
+      enabled: false  # for testing, can enable later
+
+redis:
+  auth:
+    password: redispassword
+  cluster:
+    enabled: false  # simple single node
