@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: catalog-service
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/bakchic/system-design-with-spring-boot
+    targetRevision: main
+    path: helm/catalog   # 👈 points to Helm chart
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -1,0 +1,6 @@
+image:
+  repository: yourdockerhub/catalog-service
+  tag: 1.0.0
+
+service:
+  port: 8081
