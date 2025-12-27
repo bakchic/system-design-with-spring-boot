@@ -2,7 +2,7 @@ name: Build and Push
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
 
       - name: Build
@@ -25,5 +25,5 @@ jobs:
 
       - name: Build & Push Image
         run: |
-          docker build -t yourdockerhub/catalog-service:1.0.0 .
-          docker push yourdockerhub/catalog-service:1.0.0
+          docker build -t chiruapala/catalog-service:1.0.0 .
+          docker push chiruapala/catalog-service:1.0.0
