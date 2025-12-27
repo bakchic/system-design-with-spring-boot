@@ -25,5 +25,8 @@ jobs:
 
       - name: Build & Push Image
         run: |
-          docker build -t chiruapala/catalog-service:1.0.0 .
+          docker build \
+            -t chiruapala/catalog-service:1.0.0 \
+            -f catalog-service/Dockerfile \
+            catalog-service
           docker push chiruapala/catalog-service:1.0.0
