@@ -17,16 +17,3 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: 8081
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://{{ .Values.mysql.fullname }}-primary:3306/{{ .Values.mysql.auth.database }}
-            - name: SPRING_DATASOURCE_USERNAME
-              value: { { .Values.mysql.auth.username } }
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: { { .Values.mysql.auth.password } }
-            - name: SPRING_REDIS_HOST
-              value: { { .Values.redis.fullname } }
-            - name: SPRING_REDIS_PORT
-              value: "6379"
-            - name: SPRING_REDIS_PASSWORD
-              value: { { .Values.redis.auth.password } }

@@ -2,11 +2,3 @@ apiVersion: v2
 name: catalog
 version: 0.1.0
 appVersion: "1.0.0"
-
-dependencies:
-  - name: mysql
-    version: 10.2.1    # check latest compatible version
-    repository: https://charts.bitnami.com/bitnami
-  - name: redis
-    version: 20.13.4
-    repository: https://charts.bitnami.com/bitnami
