@@ -5,8 +5,8 @@ appVersion: "1.0.0"
 
 dependencies:
   - name: mysql
-    version: 9.8.2    # check latest compatible version
+    version: 10.2.1    # check latest compatible version
     repository: https://charts.bitnami.com/bitnami
   - name: redis
-    version: 19.10.1
+    version: 20.13.4
     repository: https://charts.bitnami.com/bitnami
