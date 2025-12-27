@@ -7,8 +7,8 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/bakchic/system-design-with-spring-boot
-    targetRevision: main
+    repoURL: https://github.com/bakchic/system-design-with-spring-boot.git
+    targetRevision: dev
     path: helm/catalog   # 👈 points to Helm chart
 
   destination:
