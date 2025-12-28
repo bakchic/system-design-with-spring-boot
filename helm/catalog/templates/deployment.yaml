@@ -28,8 +28,5 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: catalogpassword
 
-            - name: SPRING_REDIS_HOST
-              value: redis
-
-            - name: SPRING_REDIS_PORT
-              value: "6379"
+            - name: SPRING_REDIS_URL
+              value: redis://redis-master:6379
