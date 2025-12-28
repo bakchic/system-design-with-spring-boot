@@ -7,6 +7,10 @@ service:
 
 
 mysql:
+  image:
+    registry: docker.io
+    repository: mysql
+    tag: "8.0.36"
   fullnameOverride: "mysql"
   auth:
     rootPassword: root
@@ -19,6 +23,10 @@ mysql:
       enabled: false   # OK for local/dev
 
 redis:
+  image:
+    registry: docker.io
+    repository: redis
+    tag: "7.0"
   fullnameOverride: "redis"
   architecture: standalone
   auth:
