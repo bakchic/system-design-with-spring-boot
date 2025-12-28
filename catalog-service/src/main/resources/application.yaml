@@ -24,7 +24,7 @@ spring:
     type: redis
   data:
     redis:
-      host: redis
+      host: redis-master
       port: 6379
       timeout: 60000
 
