@@ -29,7 +29,23 @@ spec:
               value: catalogpassword
 
             - name: SPRING_REDIS_HOST
-              value: redis-master
+              value: redis
 
             - name: SPRING_REDIS_PORT
               value: "6379"
+
+
+---
+# Redis alias Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: default
+spec:
+  type: ClusterIP
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    app: redis-master   # must match Redis pod labels
