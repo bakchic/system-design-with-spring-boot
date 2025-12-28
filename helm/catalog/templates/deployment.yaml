@@ -20,7 +20,7 @@ spec:
 
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://catalog-mysql:3306/catalogdb
+              value: jdbc:mysql://mysql:3306/catalogdb
 
             - name: SPRING_DATASOURCE_USERNAME
               value: cataloguser
