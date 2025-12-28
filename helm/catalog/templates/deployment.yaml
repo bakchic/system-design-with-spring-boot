@@ -29,7 +29,7 @@ spec:
               value: catalogpassword
 
             - name: SPRING_REDIS_HOST
-              value: redis
+              value: redis-master
 
-            - name: SPRING_REDISIS_PORT
+            - name: SPRING_REDIS_PORT
               value: "6379"
